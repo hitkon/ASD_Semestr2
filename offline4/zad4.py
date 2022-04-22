@@ -13,6 +13,8 @@ from zad4testy import runtests
 # Bedziemy iść po kolumnie od p do 0 i odnawiać znaczenie w dp[i][j] = max(poprzednego elementa w wierszu, i dp[j - T[i][3]][T[i][1] - 1] )
 # Wynik zadania będzie w dp[p][max(T[2])].
 # Dalej wracamy po tablicy odnawiamy budynki, którymi doszliśmy do tego wynika.
+# Złożoność czasowa O(nlogn + np)
+# Złożoność pamięciowa O(np)
 
 def cmp(a):
     return a[2]
