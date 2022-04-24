@@ -14,12 +14,13 @@ from zad4testy import runtests
 # Wynik zadania będzie w dp[p][max(T[2])].
 # Dalej wracamy po tablicy odnawiamy budynki, którymi doszliśmy do tego wynika.
 # Złożoność czasowa O(nlogn + np)
-# Złożoność pamięciowa O(np)
+# Złożoność pamięciowa O(maxT * p)
 
 def cmp(a):
     return a[2]
 
 def Brutte(T, p):
+    #p-=1
     maxAns = []
     maxNumber = 0
     for z in range(1, 2**len(T)):
@@ -47,13 +48,11 @@ def Brutte(T, p):
     return maxAns
 
 def select_buildings(T,p):
+    p-=1
     #return Brutte(T, p)
     buf_T = []
     for i in range(len(T)):
         buf_T.append((T[i][0], T[i][1], T[i][2], T[i][3], i))
-
-
-
 
     buf_T.sort(key=cmp)
     #print(buf_T)
@@ -64,7 +63,6 @@ def select_buildings(T,p):
         dp[i][0] = 0
     for i in range(maxX + 1):
         dp[0][i] = 0
-    #print("HI")
 
     for i in range(len(buf_T)):
         for j in range(p, -1, -1):
@@ -91,10 +89,6 @@ def select_buildings(T,p):
             cur_buf[j] = max(dp[j][buf_T[i][2]], cur_buf[j])
 
     ans = []
-    # print(dp)
-    # print(cur_buf)
-    # for i in range(len(buf_T)):
-    #print("Hi")
 
     p_buf = p
     x_state = maxX
@@ -112,9 +106,9 @@ def select_buildings(T,p):
                 x_state = buf_T[ind][1] - 1
                 p_buf -= buf_T[ind][3]
         ind-=1
-    print("HI")
+    #print("HI")
     ans.sort()
     return ans
 
-if __name__ == "__main__":
-    runtests( select_buildings )
+#if __name__ == "__main__":
+runtests( select_buildings )
