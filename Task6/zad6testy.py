@@ -1,6 +1,6 @@
-# kol1atesty.py
+# zad6testy.py
 from testy import *
-from kol1atest_spec import ALLOWED_TIME, TEST_SPEC, gentest
+from zad6test_spec import ALLOWED_TIME, TEST_SPEC, gentest
 
 from copy import deepcopy
 
@@ -9,31 +9,29 @@ def copyarg( arg ):
     return deepcopy(arg)
 
 
-def printarg(T):
-    if len(T) > 100:
-        T = T[:100]
-    out = ', '.join([w for w in T])
-    print("Wejciowe napisy:\t", limit(out))
+def printarg( G, s , t):
+    print("G : ", limit(G))
+    print("s : ", s)
+    print("t : ", t)
 
 
 def printhint( hint ):
-    print("Prawidlowy wynik:\t", hint)
+    print("Mozliwe wyniki  : ", limit(hint) )
 
 
 def printsol( sol ):
-    print("Wynik algorytmu:\t", limit(sol))
+    print("Otrzymany wynik : ", limit(sol) )
 
 
-def check( T, hint, sol ):
-    good = True
-
-    if hint != sol:
-        print("Błąd! Nieprawidlowy wynik algorytmu.")
-        good = False
-
-    return good
-
- 
+def check( G, s, t, hint, sol ):
+    if sol == None:
+      print("*")
+      if len(hint) == 0: return True
+      return False
+    sol = (min(sol), max(sol))
+    if sol in hint: return True    
+    return False
+    
 def generate_tests(num_tests = None):
     global TEST_SPEC
     TESTS = []
@@ -47,13 +45,11 @@ def generate_tests(num_tests = None):
         newtest["arg"] = arg
         newtest["hint"] = hint
         TESTS.append(newtest)
-        
-    TESTS[0]["arg"] = [["pies", "mysz", "kot", "kogut", "tok", "seip", "kot"]]
-    TESTS[0]["hint"]= 3
-
+              
     return TESTS
 
 
+ 
 def runtests( f, all_tests = True ):
     internal_runtests( copyarg, printarg, printhint, printsol, check, generate_tests, all_tests, f, ALLOWED_TIME )
 
