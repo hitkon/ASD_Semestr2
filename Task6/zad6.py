@@ -64,6 +64,7 @@ def get_path_and_mark_it(Graf, dist, used, s, f):
 
 
 def longer( G, s, t ):
+
     n = len(G)
 
     #Graf = [[] for _ in range(n)]
@@ -106,5 +107,5 @@ def longer( G, s, t ):
     return None
 
 # zmien all_tests na True zeby uruchomic wszystkie testy
-if __name__ == "__main__":
-    runtests( longer, all_tests = True )
+#if __name__ == "__main__"
+runtests( longer, all_tests = True )
