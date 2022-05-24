@@ -1,6 +1,14 @@
 from zad8testy import runtests
 import math
 
+# Ivan Zarzhitski
+# Budujemy listę wszystkich krawiędzi możliwych w grafie. Sortujemy według wartości.
+# Idziemy po posortowanej liście i uruchamiamy algorytm Kruskała od każdej, pod warunkiem że ta krawędź będzie
+# miała min wartość w podrzewie. Algorytm zwraca różnicę wartości pierwszej i ostatniej krawiędzi w poddrzewie.
+# Wynikiem będzie min_wartość zwrócona algorytmem.
+# Złożoność czasowa O(M * M * log N) = [ (M ~ N**2) ] = O(N**4 * log N)
+# Złożoność pamięciowa: O(N**2)
+
 def distance(x, y):
     return ((x[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2) ** (1/2)
 
@@ -51,5 +59,5 @@ def highway( A ):
     return min_res
 
 # zmien all_tests na True zeby uruchomic wszystkie testy
-if __name__ == "__main__":
-    runtests( highway, all_tests = True )
+
+runtests( highway, all_tests = True )
