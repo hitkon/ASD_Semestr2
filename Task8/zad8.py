@@ -6,6 +6,7 @@ import math
 # Idziemy po posortowanej liście i uruchamiamy algorytm Kruskała od każdej, pod warunkiem że ta krawędź będzie
 # miała min wartość w podrzewie. Algorytm zwraca różnicę wartości pierwszej i ostatniej krawiędzi w poddrzewie.
 # Wynikiem będzie min_wartość zwrócona algorytmem.
+# (Polepszenie)Kruskała uruchomiamy od krowiędzi - poczátku każdej unikatowej wartości.
 # Złożoność czasowa O(M * M * log N) = [ (M ~ N**2) ] = O(N**4 * log N)
 # Złożoność pamięciowa: O(N**2)
 
@@ -49,9 +50,13 @@ def highway( A ):
             G.append((dist, i, j))
     G.sort()
     min_res = 10**9+7
+    prev_cost = -1
     for i in range(len(G)):
+        if prev_cost == G[i][0]:
+            continue
+        prev_cost = G[i][0]
         res = Kruskal(G, i, len(A))
-        if res == None:
+        if res is None:
             break
         min_res = min(min_res, res)
     if min_res == 10**9+7:
